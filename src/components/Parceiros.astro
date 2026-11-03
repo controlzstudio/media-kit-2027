@@ -5,21 +5,19 @@ const t = textos.pt;
 ---
 
 <section class="secao parceiros">
-  <div class="container parceiros__topo">
-    <p class="kicker rv" data-t="brandKicker">{t.brandKicker}</p>
-    <h2 class="titulo rv rv-2" data-t="brandTitle">{t.brandTitle}</h2>
-  </div>
-
-  <div class="faixa rv rv-3">
-    <div class="faixa__trilho">
-      {[0, 1].map((copia) => (
-        <ul class="faixa__lista" aria-hidden={copia === 1 ? 'true' : undefined}>
-          {parceiros.map((m) => (
-            <li><img src={m.img} alt={copia === 0 ? m.nome : ''} /></li>
-          ))}
-        </ul>
-      ))}
+  <div class="container">
+    <div class="parceiros__topo">
+      <p class="kicker rv" data-t="brandKicker">{t.brandKicker}</p>
+      <h2 class="titulo rv rv-2" data-t="brandTitle">{t.brandTitle}</h2>
     </div>
+
+    <ul class="logos">
+      {parceiros.map((m, i) => (
+        <li class:list={['logos__item', 'rv', `rv-${(i % 4) + 1}`]}>
+          <img src={m.img} alt={m.nome} loading="lazy" />
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
@@ -27,42 +25,36 @@ const t = textos.pt;
   .parceiros__topo {
     text-align: center;
   }
-  .faixa {
+  .logos {
     margin-top: 3.5rem;
-    overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  }
-  .faixa__trilho {
     display: flex;
-    width: max-content;
-    animation: faixa 38s linear infinite;
-  }
-  .faixa:hover .faixa__trilho {
-    animation-play-state: paused;
-  }
-  .faixa__lista {
-    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    gap: clamp(40px, 7vw, 80px);
-    padding-right: clamp(40px, 7vw, 80px);
-    padding-block: 0.75rem;
+    gap: clamp(28px, 5vw, 56px) clamp(32px, 6vw, 72px);
   }
-  .faixa__lista img {
+  .logos__item {
+    display: grid;
+    place-items: center;
+    min-height: 44px;
+  }
+  .logos__item img {
     height: 34px;
     width: auto;
-    max-width: none;
+    max-width: 180px;
+    object-fit: contain;
     filter: brightness(0) invert(1);
     opacity: 0.5;
     transition: opacity 0.25s ease, transform 0.25s var(--ease-out);
   }
-  .faixa__lista img:hover {
+  .logos__item img:hover {
     opacity: 1;
     transform: scale(1.06);
   }
-  @keyframes faixa {
-    to {
-      transform: translateX(-50%);
+  @media (max-width: 560px) {
+    .logos__item img {
+      height: 26px;
+      max-width: 130px;
     }
   }
 </style>
