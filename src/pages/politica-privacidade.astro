@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
-import { contato, rodape } from '../data/conteudo';
+import { contato, textos } from '../data/conteudo';
+
+const rodape = textos.pt.copy;
 
 const atualizada = '3 de novembro de 2026';
 ---
@@ -19,7 +21,7 @@ const atualizada = '3 de novembro de 2026';
     <main class="secao">
       <article class="container politica">
         <a href="/" class="voltar">← Voltar ao mídia kit</a>
-        <p class="eyebrow">Privacidade</p>
+        <p class="kicker">Privacidade</p>
         <h1 class="titulo">Política de Privacidade</h1>
         <p class="lead">Última atualização: {atualizada}.</p>
 
@@ -50,29 +52,29 @@ const atualizada = '3 de novembro de 2026';
   .voltar {
     display: inline-block;
     margin-bottom: 2.5rem;
-    color: var(--texto-3);
+    color: var(--text-subtle);
     text-decoration: none;
     font-size: 0.875rem;
   }
   .voltar:hover {
-    color: var(--roxo);
+    color: var(--purple-light);
   }
   h2 {
     margin: 2.5rem 0 0.75rem;
     font-size: 1.25rem;
   }
-  .politica > p:not(.eyebrow):not(.lead) {
-    color: var(--texto-2);
+  .politica > p:not(.kicker):not(.lead) {
+    color: var(--text-muted);
     margin-bottom: 0.75rem;
   }
   .politica a:not(.voltar) {
-    color: var(--lilas);
+    color: var(--purple-light);
   }
   .rodape {
     padding: 2.5rem var(--gutter);
     text-align: center;
     font-size: 0.75rem;
-    color: rgb(255 255 255 / 0.25);
-    border-top: 1px solid var(--linha);
+    color: var(--text-subtle);
+    border-top: 1px solid var(--border);
   }
 </style>

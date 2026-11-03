@@ -1,41 +1,35 @@
 # Direção de arte: Mídia Kit 2027, Dennis Santana / Control Z Studio
 
 ## Origem
-A identidade vem do mídia kit 2026 (https://ctrlzmediakit.abacusai.app/), que o Dennis indicou
-como referência de visual e de texto. Esta versão começa num layout básico e vai sendo ajustada
-aos poucos.
+Redesign do mídia kit 2026, feito a partir do briefing do Dennis (paleta, comportamento por seção e textos PT/EN).
 
 ## Conceito
-Branding sem firula com rock ao fundo. A página parece um cartaz de show: fundo ameixa escuro,
-nome em caixa alta e grande, roxo como cor de palco. Fecha com um ingresso.
+Branding sem firula com rock ao fundo. O clima é de palco: fundo quase preto com luz roxa, nome em caixa alta gigante e movimento constante, sem ficar barulhento.
 
 ## Paleta (valores em src/styles/tokens.css)
-- Fundo: ameixa #221c23 (seções), #1a141b e #160f17 (faixas mais escuras), #2a232b (cards)
-- Destaque: roxo #923c99 (eyebrow, botão, barras)
-- Apoio: roxo escuro #511d56, roxo médio #6a1b70, lilás #e9d5eb, lilás claro #f5ebf6
-- Acento secundário: rosa #ff90bb (dado de mulheres, foco)
-- Texto: branco, com 60% e 40% de opacidade para os níveis secundários
+- Fundo: #120f14 (página), #16121a (faixa de Formatos), #1d1820 (cards), #262029 (card em hover)
+- Divisórias: #2a2430 e #2e2733; contorno de botão #4a3f50
+- Texto: #f4f0f6 (principal), #b9afbe (parágrafos), #a99fae (rótulos)
+- Roxo: #8e3fa8 (botão, barras, bordas), #a452c2 (hover), #c58be0 (kickers e números), #5e2d70 (barras não selecionadas)
+- Rosa: #f2a7cb (dado de Mulheres)
 
 ## Tipografia
-Space Grotesk (variável, 300–700) em tudo. Títulos em 700 com tracking negativo; eyebrows em
-caixa alta, 600, tracking 0,2em.
+Space Grotesk (400–700), servida localmente. Títulos em 700, tracking de -0,03em a -0,045em, entrelinha de 0,9 a 1. Kickers com 13px, 700, caixa alta e tracking de 0,2em.
 
 ## Forma e ritmo
-- Cantos retos, sem border-radius: combina com cartaz e ingresso
-- Largura máxima de 1200px, respiro de 16–24px nas laterais
-- Seções com 56–112px de espaçamento vertical
+- Botões com raio de 4px e altura de 52px (60px no CTA final); cards com raio de 8px e sem borda
+- Largura máxima de 1200px e 24px de respiro lateral
+- Alvos de toque com no mínimo 44px
 
 ## Hero
-Foto recortada do Dennis à direita, nome vazado gigante ao fundo e título, papéis e frase à
-esquerda.
+Nome em duas linhas à esquerda. À direita, a foto em moldura circular com anel de texto girando, anel pontilhado no sentido contrário e chips com os seguidores. Ao fundo, o nome vazado rolando.
 
-## Assinaturas
-- Nome vazado (outline) atrás da foto no hero
-- Barras de faixa etária em roxo com o número grande dentro
-- Faixa das marcas parceiras rolando sem parar
-- Ingresso inclinado no CTA final
+## Movimento
+- Reveal no scroll com `animation-timeline: view()`, com IntersectionObserver como fallback
+- Contadores e gráficos animam uma vez, ao entrar na tela
+- Só `transform` e `opacity`; tudo desliga com `prefers-reduced-motion`
 
 ## Evitar
-- Gradiente colorido chamativo e glassmorphism em excesso
-- Cantos arredondados e sombras suaves de template SaaS
-- Ícones genéricos no lugar de números e prints reais
+- Emoji no lugar de ícone (usar SVG em traço)
+- Número decorativo de fundo
+- Gradiente colorido fora da família roxa

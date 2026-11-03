@@ -1,96 +1,178 @@
-// Texto e números do media kit. Fonte: ctrlzmediakit.abacusai.app (versão 2026).
-// Atualize aqui; a página só lê este arquivo.
+// Texto (PT/EN) e números do mídia kit. Fonte única: a página e o script de idioma leem daqui.
 
 export const contato = {
   email: 'contato@controlzstudio.com.br',
   assunto: 'Proposta de Publicidade',
   site: 'https://controlzstudio.com.br',
+  siteRotulo: 'controlzstudio.com.br',
   instagram: 'https://instagram.com/ctrlz.png',
   tiktok: 'https://www.tiktok.com/@ctrlz.studio',
 };
 
-export const hero = {
-  nome: 'Dennis Santana',
-  papeis: ['Designer', 'Criador de Conteúdo', 'Músico'],
-  frase: 'Branding sem firula. Dicas de design com uns rocão de fundo.',
-};
+// Destino do botão "Fazer uma proposta".
+export const PROPOSAL_URL = `mailto:${contato.email}?subject=${encodeURIComponent(contato.assunto)}`;
 
-export const sobre = {
-  eyebrow: 'Sobre',
-  titulo: 'Quem é Dennis Santana',
-  lead: 'Fundador do Control Z Studio, Dennis transforma branding em conteúdo que conecta, com autenticidade, técnica e um bom gosto musical.',
-  cards: [
-    { badge: 'Branding', titulo: 'Designer Especializado', texto: 'Foco em Branding e Identidade Visual, criando marcas que se destacam no mercado.' },
-    { badge: 'Formação', titulo: 'Formação Sólida', texto: 'Graduado em Design e pós-graduado em Marketing e Branding.' },
-    { badge: 'Carreira', titulo: '+5 Anos de Experiência', texto: 'Atuação em agências de marketing e publicidade.' },
-    { badge: 'Conteúdo', titulo: 'Criador de Conteúdo', texto: '28 anos, designer, músico e criador de conteúdo digital focado em branding e ferramentas de design.' },
+export const numeros = {
+  instagram: { handle: '@ctrlz.png', seguidores: 45 },
+  tiktok: { handle: '@ctrlz.studio', seguidores: 16 },
+  genero: { homens: 80.8, mulheres: 19.2 },
+  idade: [
+    { de: 18, ate: 24, pct: 8.1 },
+    { de: 25, ate: 34, pct: 40.8 },
+    { de: 35, ate: 44, pct: 34.6 },
+    { de: 45, ate: 54, pct: 13.3 },
   ],
+  // 25–34 + 35–44
+  nucleo: 75.4,
 };
 
-export const redes = {
-  eyebrow: 'Redes sociais',
-  titulo: ['Uma comunidade que', 'não para de crescer'],
-  paragrafos: [
+export const formatosIcones = ['reels', 'stories', 'link', 'review'] as const;
+
+const pt = {
+  metaTitle: 'Dennis Santana, Mídia Kit',
+  metaDescription: 'Mídia kit de Dennis Santana / Control Z Studio: designer, criador de conteúdo e músico. Formatos de publicidade, números e público.',
+  langLabel: 'Idioma',
+  nav: ['Sobre', 'Redes', 'Público', 'Formatos', 'Contato'],
+  navLabel: 'Seções',
+  cta: 'Fazer uma proposta',
+  seeNumbers: 'Ver os números',
+  scrollDown: 'Rolar para a próxima seção',
+  roles: 'Designer · Criador de Conteúdo · Músico',
+  ring: 'DESIGNER · CRIADOR DE CONTEÚDO · MÚSICO · BRANDING SEM FIRULA · ',
+  photoAlt: 'Dennis Santana',
+  aboutKicker: 'Sobre',
+  aboutTitle: 'Quem é Dennis Santana',
+  aboutLead: 'Fundador do Control Z Studio, Dennis transforma branding em conteúdo que conecta, com autenticidade, técnica e um bom gosto musical.',
+  cards: [
+    { tag: 'Branding', titulo: 'Designer especializado', texto: 'Foco em branding e identidade visual, criando marcas que se destacam no mercado.' },
+    { tag: 'Formação', titulo: 'Formação sólida', texto: 'Graduado em Design e pós-graduado em Marketing e Branding.' },
+    { tag: 'Carreira', titulo: '+7 anos de experiência', texto: 'Atuação em agências de marketing e publicidade.' },
+    { tag: 'Conteúdo', titulo: 'Criador de conteúdo', texto: '28 anos, designer, músico e criador de conteúdo digital focado em branding e ferramentas de design.' },
+  ],
+  socialKicker: 'Redes sociais',
+  socialTitle: 'Uma comunidade que <span class="destaque">não para de crescer</span>',
+  social: [
     'O Control Z Studio começou em 2022 apenas como portfólio. Mas, na intenção de conseguir seguidores e clientes de forma orgânica, também se tornou um canal de conteúdo informativo.',
     'Além de clientes, os reels atraíram milhares de outros designers e profissionais da área criativa.',
+    'Hoje, o perfil não para de crescer. Só em 2025, ganhou mais de <strong>20 mil seguidores</strong>.',
+    'O diferencial são as dicas rápidas e novidades dos softwares da área, alinhadas a trilhas de rock, metal e música alternativa, que geraram uma enorme identificação e senso de comunidade ao perfil.',
   ],
-  destaque: { antes: 'Hoje, o perfil não para de crescer. Onde só em 2025 ganhou mais de ', forte: '20 mil seguidores', depois: '.' },
-  fechamento: 'O diferencial são as dicas rápidas e novidades dos softwares da área, alinhados a trilhas de rock, metal e música alternativa, que geraram uma enorme identificação e senso de comunidade ao perfil.',
-  perfis: [
-    { rede: 'Instagram', handle: '@ctrlz.png', seguidores: '46,7 mil seguidores', href: contato.instagram, img: '/social-insta.png', w: 488, h: 1005 },
-    { rede: 'TikTok', handle: '@ctrlz.studio', seguidores: '16 mil seguidores', href: contato.tiktok, img: '/social-tiktok.png', w: 479, h: 943 },
-  ],
-};
-
-export const publico = {
-  eyebrow: 'Público-alvo',
-  titulo: 'Quem acompanha Dennis',
-  lead: 'Designers, profissionais criativos e empreendedores interessados em branding, softwares de design e equipamentos.',
-  genero: [
-    { rotulo: 'Homens', pct: 80.8 },
-    { rotulo: 'Mulheres', pct: 19.2 },
-  ],
-  idade: [
-    { faixa: 'entre 18 e 24 anos', pct: 8.1 },
-    { faixa: 'entre 25 e 34 anos', pct: 40.8 },
-    { faixa: 'entre 35 e 44 anos', pct: 34.6 },
-    { faixa: 'entre 45 e 54 anos', pct: 13.3 },
-  ],
-};
-
-export const formatos = {
-  eyebrow: 'Formatos',
-  titulo: 'Como podemos trabalhar juntos',
-  lead: 'Diferentes formas de integrar sua marca ao universo do Control Z Studio.',
-  cards: [
-    { titulo: 'Reels Patrocinados', texto: 'Vídeos curtos com dicas de design integradas à mensagem da marca.' },
+  followers: 'seguidores',
+  seeProfile: 'Ver perfil',
+  igAlt: 'Perfil do Instagram de Dennis Santana',
+  ttAlt: 'Perfil do TikTok de Dennis Santana',
+  audKicker: 'Público-alvo',
+  audTitle: 'Quem acompanha Dennis',
+  audLead: 'Designers, profissionais criativos e empreendedores interessados em branding, softwares de design e equipamentos.',
+  coreLabel: 'da audiência tem entre 25 e 44 anos',
+  gender: 'Gênero',
+  men: 'Homens',
+  women: 'Mulheres',
+  genderAria: 'Gênero da audiência: Homens 80,8%, Mulheres 19,2%',
+  age: 'Faixa etária',
+  ageHint: 'Clique em uma faixa para ver o detalhe',
+  ageText: 'da audiência tem entre {a} e {b} anos',
+  fmtKicker: 'Formatos',
+  fmtTitle: 'Como podemos trabalhar juntos',
+  fmtLead: 'Diferentes formas de integrar sua marca ao universo do Control Z Studio.',
+  formatos: [
+    { titulo: 'Reels patrocinados', texto: 'Vídeos curtos com dicas de design integradas à mensagem da marca.' },
     { titulo: 'Stories', texto: 'Sequências de stories com link direto para o produto ou serviço.' },
-    { titulo: 'Link na Bio & Stories', texto: 'Direcionamento de tráfego qualificado via link e swipe up.' },
-    { titulo: 'Review de Software / Produto', texto: 'Análise aprofundada de ferramentas, softwares e equipamentos de design.' },
+    { titulo: 'Link na bio & stories', texto: 'Direcionamento de tráfego qualificado via link e swipe up.' },
+    { titulo: 'Review de software / produto', texto: 'Análise aprofundada de ferramentas, softwares e equipamentos de design.' },
   ],
+  fmtCta: 'Quero esse formato',
+  brandKicker: 'Marcas parceiras',
+  brandTitle: 'Quem já confia no trabalho',
+  ctaKicker: 'Vamos conversar',
+  ctaTitle: 'Vamos criar algo incrível juntos?',
+  ctaLead: 'Entre em contato para discutir uma parceria que conecta a sua marca ao público criativo.',
+  footerSite: 'Site',
+  footerEmail: 'E-mail',
+  footerPrivacy: 'Privacidade',
+  footerNav: 'Redes e contato',
+  copy: '© 2026 Control Z Studio. Todos os direitos reservados.',
 };
 
-export const parceiros = {
-  eyebrow: 'Marcas parceiras',
-  titulo: 'Quem já confia no trabalho',
-  marcas: [
-    { nome: 'Adobe', img: '/partners/adobe.png' },
-    { nome: 'Abacus AI', img: '/partners/abacus.png' },
-    { nome: 'Insider', img: '/partners/insider.png' },
-    { nome: 'Pacdora', img: '/partners/pacdora.png' },
-    { nome: 'Pippit', img: '/partners/pippit-v2.png' },
-    { nome: 'Tripo', img: '/partners/tripo.png' },
-    { nome: 'Vmake', img: '/partners/vmake.png' },
-    { nome: 'Zawa', img: '/partners/zawa.png' },
+export type Dicionario = typeof pt;
+
+const en: Dicionario = {
+  metaTitle: 'Dennis Santana, Media Kit',
+  metaDescription: 'Media kit for Dennis Santana / Control Z Studio: designer, content creator and musician. Ad formats, numbers and audience.',
+  langLabel: 'Language',
+  nav: ['About', 'Social', 'Audience', 'Formats', 'Contact'],
+  navLabel: 'Sections',
+  cta: 'Send a proposal',
+  seeNumbers: 'See the numbers',
+  scrollDown: 'Scroll to the next section',
+  roles: 'Designer · Content Creator · Musician',
+  ring: 'DESIGNER · CONTENT CREATOR · MUSICIAN · NO-NONSENSE BRANDING · ',
+  photoAlt: 'Dennis Santana',
+  aboutKicker: 'About',
+  aboutTitle: 'Meet Dennis Santana',
+  aboutLead: 'Founder of Control Z Studio, Dennis turns branding into content that connects, with authenticity, craft and good taste in music.',
+  cards: [
+    { tag: 'Branding', titulo: 'Specialist designer', texto: 'Focused on branding and visual identity, building brands that stand out.' },
+    { tag: 'Education', titulo: 'Solid background', texto: 'Degree in Design, postgraduate in Marketing and Branding.' },
+    { tag: 'Career', titulo: '7+ years of experience', texto: 'Worked at marketing and advertising agencies.' },
+    { tag: 'Content', titulo: 'Content creator', texto: '28 years old: designer, musician and digital creator focused on branding and design tools.' },
   ],
+  socialKicker: 'Social media',
+  socialTitle: 'A community that <span class="destaque">keeps on growing</span>',
+  social: [
+    'Control Z Studio started in 2022 as a simple portfolio. Aiming to win followers and clients organically, it also became an educational content channel.',
+    'Beyond clients, the reels drew thousands of other designers and creative professionals.',
+    'Today the profile keeps growing. In 2025 alone it gained more than <strong>20K followers</strong>.',
+    'What sets it apart: quick tips and the latest in design software, set to rock, metal and alternative music, which built strong identification and a real sense of community.',
+  ],
+  followers: 'followers',
+  seeProfile: 'View profile',
+  igAlt: 'Dennis Santana Instagram profile',
+  ttAlt: 'Dennis Santana TikTok profile',
+  audKicker: 'Audience',
+  audTitle: 'Who follows Dennis',
+  audLead: 'Designers, creative professionals and entrepreneurs interested in branding, design software and gear.',
+  coreLabel: 'of the audience is aged 25 to 44',
+  gender: 'Gender',
+  men: 'Men',
+  women: 'Women',
+  genderAria: 'Audience gender: Men 80.8%, Women 19.2%',
+  age: 'Age range',
+  ageHint: 'Tap a range to see the detail',
+  ageText: 'of the audience is aged {a} to {b}',
+  fmtKicker: 'Formats',
+  fmtTitle: 'How we can work together',
+  fmtLead: 'Different ways to bring your brand into the Control Z Studio universe.',
+  formatos: [
+    { titulo: 'Sponsored reels', texto: 'Short videos with design tips woven into your brand message.' },
+    { titulo: 'Stories', texto: 'Story sequences with a direct link to your product or service.' },
+    { titulo: 'Link in bio & stories', texto: 'Qualified traffic through link and swipe up.' },
+    { titulo: 'Software / product review', texto: 'In-depth review of design tools, software and gear.' },
+  ],
+  fmtCta: 'I want this format',
+  brandKicker: 'Partner brands',
+  brandTitle: 'Brands that trust the work',
+  ctaKicker: "Let's talk",
+  ctaTitle: 'Shall we build something great together?',
+  ctaLead: 'Get in touch to discuss a partnership that connects your brand with a creative audience.',
+  footerSite: 'Website',
+  footerEmail: 'Email',
+  footerPrivacy: 'Privacy',
+  footerNav: 'Social and contact',
+  copy: '© 2026 Control Z Studio. All rights reserved.',
 };
 
-export const cta = {
-  eyebrow: 'Vamos conversar',
-  titulo: 'Vamos criar algo incrível juntos?',
-  lead: 'Entre em contato para discutir uma parceria que conecta a sua marca ao público criativo.',
-  botao: 'Fazer uma proposta',
-  ingresso: 'Publicidade & Branding',
-};
+export const textos = { pt, en };
+export type Idioma = keyof typeof textos;
 
-export const rodape = '© 2027 Control Z Studio. Todos os direitos reservados.';
+export const parceiros = [
+  { nome: 'Adobe', img: '/partners/adobe.png' },
+  { nome: 'CapCut', img: '/partners/capcut.png' },
+  { nome: 'Abacus.AI', img: '/partners/abacus.png' },
+  { nome: 'Insider', img: '/partners/insider.png' },
+  { nome: 'Pacdora', img: '/partners/pacdora.png' },
+  { nome: 'Pippit', img: '/partners/pippit-v2.png' },
+  { nome: 'Tripo', img: '/partners/tripo.png' },
+  { nome: 'Vmake', img: '/partners/vmake.png' },
+  { nome: 'Zawa', img: '/partners/zawa.png' },
+];

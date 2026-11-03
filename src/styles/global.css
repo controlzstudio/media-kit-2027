@@ -1,7 +1,6 @@
 @import '@fontsource-variable/space-grotesk';
 @import './tokens.css';
 
-
 *,
 *::before,
 *::after {
@@ -10,25 +9,36 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
 }
 
 body {
   margin: 0;
-  background: var(--ameixa-700);
-  color: var(--texto);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--fonte);
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
 }
 
 img {
-  display: block;
-  max-width: 100%;
   height: auto;
 }
 
 a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
   color: inherit;
 }
 
@@ -39,69 +49,167 @@ p {
   margin: 0;
 }
 
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .container {
   width: 100%;
-  max-width: var(--largura);
+  max-width: calc(var(--largura) + 2 * var(--gutter));
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
 
 .secao {
-  padding-block: clamp(56px, 9vw, 112px);
+  padding-block: clamp(72px, 10vw, 128px);
 }
 
-.eyebrow {
-  color: var(--roxo);
-  font-size: 0.8125rem;
-  font-weight: 600;
+.kicker {
+  color: var(--purple-light);
+  font-size: 13px;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .titulo {
-  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.destaque {
+  color: var(--purple-light);
 }
 
 .lead {
-  margin-top: 1rem;
-  max-width: 42rem;
-  color: var(--texto-2);
-  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  margin-top: 1.25rem;
+  max-width: 40rem;
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
 }
 
-.centro {
-  text-align: center;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.centro .lead {
-  margin-inline: auto;
-}
-
+/* Botões */
 .botao {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: var(--roxo);
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 52px;
+  padding: 0 1.5rem;
+  border-radius: var(--raio-botao);
+  border: 1px solid transparent;
+  background: var(--purple);
   color: #fff;
   font-weight: 600;
-  font-size: 1.0625rem;
+  font-size: 1rem;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-out), background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .botao:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 30px rgb(146 60 153 / 0.5);
+  transform: translateY(-2px);
+  background: var(--purple-hover);
+  box-shadow: var(--sombra-roxa);
+}
+
+.botao--contorno {
+  background: transparent;
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.botao--contorno:hover {
+  background: var(--surface-hover);
+  border-color: var(--purple-light);
+  box-shadow: none;
+}
+
+.botao--grande {
+  min-height: 60px;
+  padding: 0 2rem;
+  font-size: 1.125rem;
+}
+
+.seta {
+  display: inline-block;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.botao:hover .seta,
+a:hover > .seta {
+  transform: translate(3px, -3px);
 }
 
 :focus-visible {
-  outline: 2px solid var(--rosa);
+  outline: 2px solid var(--purple-light);
   outline-offset: 3px;
+}
+
+/* Reveal no scroll: timeline nativa onde houver, IntersectionObserver no resto.
+   Sem JS e sem suporte, o conteúdo fica visível. */
+@keyframes revelar {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .rv {
+    animation: revelar linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+  .rv-2 {
+    animation-range: entry 8% entry 55%;
+  }
+  .rv-3 {
+    animation-range: entry 16% entry 65%;
+  }
+  .rv-4 {
+    animation-range: entry 24% entry 75%;
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .js .rv {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  }
+  .js .rv-2 {
+    transition-delay: 0.08s;
+  }
+  .js .rv-3 {
+    transition-delay: 0.16s;
+  }
+  .js .rv-4 {
+    transition-delay: 0.24s;
+  }
+  .js .rv.is-in {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -113,5 +221,9 @@ p {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+  .js .rv {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

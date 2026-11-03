@@ -1,24 +1,31 @@
-/* Tokens do media kit. Origem: identidade do mídia kit 2026 (ctrlzmediakit.abacusai.app). */
+/* Tokens do mídia kit 2027. */
 
 :root {
-  --ameixa-900: #160f17;
-  --ameixa-800: #1a141b;
-  --ameixa-700: #221c23;
-  --ameixa-600: #2a232b;
-  --roxo-escuro: #511d56;
-  --roxo-medio: #6a1b70;
-  --roxo: #923c99;
-  --lilas: #e9d5eb;
-  --lilas-claro: #f5ebf6;
-  --rosa: #ff90bb;
-  --menta: #bcdfd3;
+  --bg: #120f14;
+  --bg-alt: #16121a;
+  --surface: #1d1820;
+  --surface-hover: #262029;
+  --border: #2a2430;
+  --border-2: #2e2733;
+  --border-strong: #4a3f50;
 
-  --texto: #ffffff;
-  --texto-2: rgb(255 255 255 / 0.6);
-  --texto-3: rgb(255 255 255 / 0.4);
-  --linha: rgb(255 255 255 / 0.12);
+  --text: #f4f0f6;
+  --text-muted: #b9afbe;
+  --text-subtle: #a99fae;
+
+  --purple: #8e3fa8;
+  --purple-hover: #a452c2;
+  --purple-light: #c58be0;
+  --purple-dark: #5e2d70;
+  --pink: #f2a7cb;
 
   --fonte: 'Space Grotesk Variable', system-ui, sans-serif;
   --largura: 1200px;
-  --gutter: clamp(16px, 4vw, 24px);
+  --gutter: 24px;
+  --header-h: 68px;
+
+  --raio-botao: 4px;
+  --raio-card: 8px;
+  --sombra-roxa: 0 10px 30px rgb(142 63 168 / 0.35);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }

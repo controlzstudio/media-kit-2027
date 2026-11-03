@@ -1,0 +1,286 @@
+---
+import { numeros, textos } from '../data/conteudo';
+import { percentual } from '../scripts/formato';
+
+const t = textos.pt;
+const { genero, idade, nucleo } = numeros;
+const maior = Math.max(...idade.map((f) => f.pct));
+const padrao = 1; // 25–34
+const textoIdade = (i: number) => t.ageText.replace('{a}', String(idade[i].de)).replace('{b}', String(idade[i].ate));
+---
+
+<section id="publico" class="secao" data-contadores>
+  <div class="container">
+    <div class="publico__topo">
+      <div>
+        <p class="kicker rv" data-t="audKicker">{t.audKicker}</p>
+        <h2 class="titulo rv rv-2" data-t="audTitle">{t.audTitle}</h2>
+        <p class="lead rv rv-3" data-t="audLead">{t.audLead}</p>
+      </div>
+      <div class="nucleo rv rv-3">
+        <p class="nucleo__num" data-num={nucleo} data-fmt="percentual" data-contar>{percentual(nucleo, 'pt')}</p>
+        <p class="nucleo__rotulo" data-t="coreLabel">{t.coreLabel}</p>
+      </div>
+    </div>
+
+    <div class="publico__cards">
+      <div class="painel painel--genero rv">
+        <h3 class="painel__titulo" data-t="gender">{t.gender}</h3>
+        <div
+          class="donut"
+          role="img"
+          data-t-attr="aria-label:genderAria"
+          aria-label={t.genderAria}
+          style={`--h: ${genero.homens}; --m: ${genero.mulheres}`}
+        >
+          <div class="donut__centro" aria-hidden="true">
+            <span class="donut__num" data-num={genero.homens} data-fmt="percentual" data-contar>{percentual(genero.homens, 'pt')}</span>
+            <span class="donut__rotulo" data-t="men">{t.men}</span>
+          </div>
+        </div>
+        <ul class="legenda">
+          <li><span class="legenda__cor legenda__cor--h"></span><span data-t="men">{t.men}</span><strong data-num={genero.homens} data-fmt="percentual">{percentual(genero.homens, 'pt')}</strong></li>
+          <li><span class="legenda__cor legenda__cor--m"></span><span data-t="women">{t.women}</span><strong data-num={genero.mulheres} data-fmt="percentual">{percentual(genero.mulheres, 'pt')}</strong></li>
+        </ul>
+      </div>
+
+      <div class="painel painel--idade rv rv-2" data-idade>
+        <h3 class="painel__titulo" data-t="age">{t.age}</h3>
+        <div class="idade__destaque" aria-live="polite">
+          <span class="idade__num" data-idade-num data-num={idade[padrao].pct} data-fmt="percentual" data-contar>{percentual(idade[padrao].pct, 'pt')}</span>
+          <span class="idade__texto" data-idade-texto>{textoIdade(padrao)}</span>
+        </div>
+        <div class="colunas" role="tablist" data-t-attr="aria-label:age" aria-label={t.age}>
+          {idade.map((f, i) => (
+            <button
+              type="button"
+              role="tab"
+              class="coluna"
+              aria-selected={i === padrao ? 'true' : 'false'}
+              tabindex={i === padrao ? 0 : -1}
+              data-pct={f.pct}
+              data-de={f.de}
+              data-ate={f.ate}
+              style={`--alt: ${Math.round((f.pct / maior) * 180)}px`}
+            >
+              <span class="coluna__barra"></span>
+              <span class="coluna__rotulo">{f.de}–{f.ate}</span>
+              <span class="sr-only" data-num={f.pct} data-fmt="percentual">{percentual(f.pct, 'pt')}</span>
+            </button>
+          ))}
+        </div>
+        <p class="idade__dica" data-t="ageHint">{t.ageHint}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @property --p {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 1;
+  }
+
+  .publico__topo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem 3rem;
+  }
+  .nucleo {
+    max-width: 18rem;
+  }
+  .nucleo__num {
+    font-size: clamp(56px, 8vw, 88px);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    color: var(--purple-light);
+    font-variant-numeric: tabular-nums;
+  }
+  .nucleo__rotulo {
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+  }
+
+  .publico__cards {
+    margin-top: 3.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+  .painel {
+    padding: clamp(24px, 4vw, 40px);
+    border-radius: var(--raio-card);
+    background: var(--surface);
+    min-width: 0;
+  }
+  .painel--genero {
+    flex: 1 1 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .painel--idade {
+    flex: 2 1 520px;
+  }
+  .painel__titulo {
+    align-self: flex-start;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-subtle);
+    margin-bottom: 2rem;
+  }
+
+  /* Donut: --p vai de 0 a 1 quando a seção entra na tela */
+  .donut {
+    --p: 1;
+    width: 240px;
+    max-width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(
+      var(--purple) 0 calc(var(--h) * var(--p) * 1%),
+      var(--pink) 0 calc((var(--h) + var(--m)) * var(--p) * 1%),
+      #2a2430 0
+    );
+    transition: --p 1.7s var(--ease-out);
+  }
+  :global(.js) [data-contadores]:not(.is-on) .donut {
+    --p: 0;
+  }
+  .donut__centro {
+    width: 68%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--surface);
+    display: grid;
+    place-content: center;
+    text-align: center;
+  }
+  .donut__num {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .donut__rotulo {
+    margin-top: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+  .legenda {
+    margin-top: 2rem;
+    width: 100%;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .legenda li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+  }
+  .legenda strong {
+    margin-left: auto;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .legenda__cor {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+  }
+  .legenda__cor--h {
+    background: var(--purple);
+  }
+  .legenda__cor--m {
+    background: var(--pink);
+  }
+
+  /* Faixa etária */
+  .idade__destaque {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    margin-bottom: 2rem;
+  }
+  .idade__num {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    color: var(--purple-light);
+    font-variant-numeric: tabular-nums;
+  }
+  .idade__texto {
+    color: var(--text-muted);
+  }
+  .colunas {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(10px, 2vw, 20px);
+    align-items: end;
+    height: 230px;
+    border-bottom: 1px solid var(--border);
+  }
+  .coluna {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: 0.6rem;
+    height: 100%;
+    min-height: 44px;
+    padding: 0 0 0.75rem;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .coluna__barra {
+    display: block;
+    height: var(--alt);
+    border-radius: 6px 6px 2px 2px;
+    background: var(--purple-dark);
+    transform-origin: bottom;
+    transition: transform 1.2s var(--ease-out), background-color 0.25s ease;
+  }
+  :global(.js) [data-contadores]:not(.is-on) .coluna__barra {
+    transform: scaleY(0);
+  }
+  .coluna:hover .coluna__barra {
+    background: #7a3d91;
+  }
+  .coluna[aria-selected='true'] .coluna__barra {
+    background: var(--purple-light);
+  }
+  .coluna__rotulo {
+    color: var(--text-subtle);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .coluna[aria-selected='true'] .coluna__rotulo {
+    color: var(--text);
+  }
+  .coluna:nth-child(2) .coluna__barra {
+    transition-delay: 0.08s, 0s;
+  }
+  .coluna:nth-child(3) .coluna__barra {
+    transition-delay: 0.16s, 0s;
+  }
+  .coluna:nth-child(4) .coluna__barra {
+    transition-delay: 0.24s, 0s;
+  }
+  .idade__dica {
+    margin-top: 1rem;
+    color: var(--text-subtle);
+    font-size: 0.8125rem;
+  }
+</style>

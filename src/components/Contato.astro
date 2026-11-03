@@ -1,0 +1,89 @@
+---
+import { PROPOSAL_URL, contato, textos } from '../data/conteudo';
+import Icone from './Icone.astro';
+
+const t = textos.pt;
+---
+
+<section id="contato" class="secao contato">
+  <div class="container contato__corpo">
+    <p class="kicker rv" data-t="ctaKicker">{t.ctaKicker}</p>
+    <h2 class="contato__titulo rv rv-2" data-t="ctaTitle">{t.ctaTitle}</h2>
+    <p class="lead rv rv-3" data-t="ctaLead">{t.ctaLead}</p>
+    <div class="rv rv-4">
+      <a href={PROPOSAL_URL} class="botao botao--grande"><span data-t="cta">{t.cta}</span> <span class="seta" aria-hidden="true">↗</span></a>
+    </div>
+
+    <ul class="pilulas rv rv-4">
+      <li><a href={contato.instagram} target="_blank" rel="noopener noreferrer"><Icone nome="instagram" tamanho={18} />Instagram</a></li>
+      <li><a href={contato.tiktok} target="_blank" rel="noopener noreferrer"><Icone nome="tiktok" tamanho={18} />TikTok</a></li>
+      <li><a href={contato.site} target="_blank" rel="noopener noreferrer"><Icone nome="globo" tamanho={18} />{contato.siteRotulo}</a></li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .contato {
+    background: radial-gradient(80% 90% at 50% 100%, #3a1f47 0%, #1a1320 50%, #120f14 80%);
+    padding-block: clamp(96px, 14vw, 176px);
+  }
+  .contato__corpo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .contato__titulo {
+    max-width: 14ch;
+    font-size: clamp(44px, 8vw, 96px);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    background: linear-gradient(100deg, #f4f0f6 0%, #f4f0f6 35%, #c58be0 50%, #f4f0f6 65%, #f4f0f6 100%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: brilho 6s linear infinite;
+  }
+  .contato .lead {
+    margin-inline: auto;
+  }
+  .contato .botao {
+    margin-top: 2.5rem;
+  }
+  .pilulas {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .pilulas a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0 1.1rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .pilulas a:hover {
+    color: var(--text);
+    border-color: var(--purple-light);
+    background: rgb(197 139 224 / 0.08);
+  }
+  @keyframes brilho {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: -150% 0;
+    }
+  }
+</style>
