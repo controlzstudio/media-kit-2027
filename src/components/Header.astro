@@ -1,0 +1,132 @@
+---
+import { textos } from '../data/conteudo';
+
+const t = textos.pt;
+const ancoras = ['sobre', 'redes', 'publico', 'formatos', 'contato'];
+---
+
+<header class="header">
+  <div class="container header__linha">
+    <a href="#topo" class="header__logo">
+      <img src="/logo-ctrlz.png" alt="Control Z Studio" width="512" height="101" />
+    </a>
+
+    <nav class="header__nav" data-t-attr="aria-label:navLabel" aria-label={t.navLabel}>
+      {ancoras.map((id, i) => <a href={`#${id}`} data-t={`nav.${i}`}>{t.nav[i]}</a>)}
+    </nav>
+
+    <div class="header__acoes">
+      <div class="idioma" role="group" data-t-attr="aria-label:langLabel" aria-label={t.langLabel}>
+        <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a href="#contato" class="header__cta" data-t="cta">{t.cta}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(18 15 20 / 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header__linha {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .header__logo {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .header__logo img {
+    height: 28px;
+    width: auto;
+  }
+  .header__nav {
+    display: none;
+    gap: 0.25rem;
+  }
+  .header__nav a {
+    padding: 0.75rem 0.85rem;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .header__nav a:hover {
+    color: var(--text);
+  }
+  .header__acoes {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .idioma {
+    display: flex;
+    padding: 3px;
+    border: 1px solid var(--border-2);
+    border-radius: 999px;
+    background: var(--surface);
+  }
+  .idioma button {
+    min-width: 44px;
+    min-height: 38px;
+    padding: 0 0.75rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-subtle);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .idioma button:hover {
+    color: var(--text);
+  }
+  .idioma button[aria-pressed='true'] {
+    background: var(--purple);
+    color: #fff;
+  }
+  .header__cta {
+    display: none;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 1rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--raio-botao);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .header__cta:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+  }
+  @media (min-width: 560px) {
+    .header__cta {
+      display: inline-flex;
+    }
+  }
+  @media (min-width: 820px) {
+    .header__nav {
+      display: flex;
+    }
+  }
+</style>

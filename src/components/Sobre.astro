@@ -1,0 +1,109 @@
+---
+import { textos } from '../data/conteudo';
+
+const t = textos.pt;
+---
+
+<section id="sobre" class="secao">
+  <div class="container">
+    <div class="sobre__topo">
+      <p class="kicker rv" data-t="aboutKicker">{t.aboutKicker}</p>
+      <h2 class="titulo rv rv-2" data-t="aboutTitle">{t.aboutTitle}</h2>
+      <p class="lead rv rv-3" data-t="aboutLead">{t.aboutLead}</p>
+    </div>
+
+    <ul class="sobre__cards">
+      {t.cards.map((c, i) => (
+        <li class:list={['card', 'rv', `rv-${i + 1}`]} data-spotlight>
+          <div class="card__topo">
+            <span class="card__tag" data-t={`cards.${i}.tag`}>{c.tag}</span>
+            <span class="card__num">{String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <h3 class="card__titulo" data-t={`cards.${i}.titulo`}>{c.titulo}</h3>
+          <p class="card__texto" data-t={`cards.${i}.texto`}>{c.texto}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .sobre__cards {
+    margin-top: 3.5rem;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .card {
+    --mx: 50%;
+    --my: 0%;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 1.75rem 1.75rem;
+    border-radius: var(--raio-card);
+    background: var(--surface);
+    transition: translate 0.35s var(--ease-out), background-color 0.3s ease;
+  }
+  /* Linha de destaque no topo, que se estende no hover */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 56px;
+    height: 3px;
+    background: var(--purple);
+    transition: width 0.45s var(--ease-out);
+  }
+  /* Spotlight que segue o mouse */
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(320px circle at var(--mx) var(--my), rgb(142 63 168 / 0.22), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .card:hover {
+    translate: 0 -8px;
+    background: var(--surface-hover);
+  }
+  .card:hover::before {
+    width: 100%;
+  }
+  .card:hover::after {
+    opacity: 1;
+  }
+  .card__topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2.5rem;
+  }
+  .card__tag {
+    color: var(--purple-light);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .card__num {
+    color: var(--text-subtle);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .card__titulo {
+    position: relative;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .card__texto {
+    position: relative;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+  }
+</style>

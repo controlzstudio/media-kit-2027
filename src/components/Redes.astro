@@ -1,0 +1,118 @@
+---
+import { contato, numeros, textos } from '../data/conteudo';
+import { milhares } from '../scripts/formato';
+
+const t = textos.pt;
+const perfis = [
+  { chave: 'ig', href: contato.instagram, img: '/social-insta.png', w: 488, h: 1005, alt: 'igAlt', ...numeros.instagram, fmt: 'milhares', mais: true },
+  { chave: 'tt', href: contato.tiktok, img: '/social-tiktok.png', w: 479, h: 943, alt: 'ttAlt', ...numeros.tiktok, fmt: 'milhares-exato', mais: false },
+] as const;
+---
+
+<section id="redes" class="secao redes">
+  <div class="container redes__grade">
+    <div>
+      <p class="kicker rv" data-t="socialKicker">{t.socialKicker}</p>
+      <h2 class="titulo rv rv-2" data-t-html="socialTitle" set:html={t.socialTitle} />
+      <div class="redes__texto">
+        {t.social.map((p, i) => <p class:list={['rv', `rv-${Math.min(i + 2, 4)}`]} data-t-html={`social.${i}`} set:html={p} />)}
+      </div>
+    </div>
+
+    <ul class="redes__celulares" data-contadores>
+      {perfis.map((p) => (
+        <li class:list={['celular', `celular--${p.chave}`, 'rv']}>
+          <a href={p.href} target="_blank" rel="noopener noreferrer" class="celular__link">
+            <span class="celular__tela">
+              <img src={p.img} alt={t[p.alt]} data-t-attr={`alt:${p.alt}`} width={p.w} height={p.h} loading="lazy" />
+            </span>
+            <span class="celular__handle">{p.handle}</span>
+            <span class="celular__num" data-num={p.seguidores} data-fmt={p.fmt} data-contar>{milhares(p.seguidores, 'pt', p.mais)}</span>
+            <span class="celular__rodape">
+              <span data-t="followers">{t.followers}</span> · <span class="celular__ver"><span data-t="seeProfile">{t.seeProfile}</span> <span class="seta" aria-hidden="true">↗</span></span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .redes {
+    background: linear-gradient(180deg, #120f14 0%, #1a1420 50%, #120f14 100%);
+  }
+  .redes__grade {
+    display: grid;
+    gap: 4rem;
+    align-items: center;
+  }
+  .redes__texto {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.125rem;
+    color: var(--text-muted);
+    max-width: 34rem;
+  }
+  .redes__texto :global(strong) {
+    color: #fff;
+    font-weight: 700;
+  }
+  .redes__celulares {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 3vw, 32px);
+    padding-bottom: 56px;
+  }
+  .celular--tt {
+    margin-top: 56px;
+  }
+  .celular__link {
+    display: grid;
+    gap: 0.25rem;
+    text-decoration: none;
+  }
+  .celular__tela {
+    display: block;
+    overflow: hidden;
+    border: 6px solid #2a2430;
+    border-radius: 22px;
+    box-shadow: 0 30px 60px rgb(0 0 0 / 0.55), 0 8px 20px rgb(0 0 0 / 0.35);
+    margin-bottom: 1.25rem;
+    transition: transform 0.45s var(--ease-out), box-shadow 0.45s ease;
+  }
+  .celular--ig .celular__tela {
+    transform: rotate(-3deg);
+  }
+  .celular--tt .celular__tela {
+    transform: rotate(3deg);
+  }
+  .celular__link:hover .celular__tela {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 40px 70px rgb(0 0 0 / 0.6), 0 0 0 1px var(--purple);
+  }
+  .celular__handle {
+    color: var(--text-subtle);
+    font-size: 0.875rem;
+  }
+  .celular__num {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .celular__rodape {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+  .celular__ver {
+    color: var(--purple-light);
+  }
+  @media (min-width: 900px) {
+    .redes__grade {
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+  }
+</style>

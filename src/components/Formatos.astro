@@ -1,0 +1,168 @@
+---
+import { formatosIcones, textos } from '../data/conteudo';
+import Icone from './Icone.astro';
+
+const t = textos.pt;
+---
+
+<section id="formatos" class="secao formatos">
+  <div class="container">
+    <p class="kicker rv" data-t="fmtKicker">{t.fmtKicker}</p>
+    <h2 class="titulo rv rv-2" data-t="fmtTitle">{t.fmtTitle}</h2>
+    <p class="lead rv rv-3" data-t="fmtLead">{t.fmtLead}</p>
+
+    <div class="formatos__grade" data-abas>
+      <div class="formatos__lista" role="tablist" data-t-attr="aria-label:fmtTitle" aria-label={t.fmtTitle} aria-orientation="vertical">
+        {t.formatos.map((f, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`fmt-aba-${i}`}
+            aria-controls={`fmt-painel-${i}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            class:list={['aba', 'rv', `rv-${i + 1}`]}
+          >
+            <span class="aba__icone"><Icone nome={formatosIcones[i]} tamanho={22} /></span>
+            <span class="aba__titulo" data-t={`formatos.${i}.titulo`}>{f.titulo}</span>
+            <Icone nome="seta" class="aba__seta" />
+          </button>
+        ))}
+      </div>
+
+      <div class="formatos__painel rv rv-2">
+        {t.formatos.map((f, i) => (
+          <div class="painel-fmt" role="tabpanel" id={`fmt-painel-${i}`} aria-labelledby={`fmt-aba-${i}`} hidden={i !== 0}>
+            <span class="painel-fmt__icone"><Icone nome={formatosIcones[i]} tamanho={36} /></span>
+            <h3 class="painel-fmt__titulo" data-t={`formatos.${i}.titulo`}>{f.titulo}</h3>
+            <p class="painel-fmt__texto" data-t={`formatos.${i}.texto`}>{f.texto}</p>
+            <a href="#contato" class="botao"><span data-t="fmtCta">{t.fmtCta}</span> <span class="seta" aria-hidden="true">↗</span></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .formatos {
+    background: var(--bg-alt);
+    border-block: 1px solid var(--border);
+  }
+  .formatos__grade {
+    margin-top: 3.5rem;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .formatos__lista {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .aba {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    min-height: 76px;
+    padding: 0.9rem 1.25rem 0.9rem 0.9rem;
+    border: 1px solid #2a2430;
+    border-radius: var(--raio-card);
+    background: var(--surface);
+    text-align: left;
+    cursor: pointer;
+    transition: translate 0.3s var(--ease-out), background-color 0.25s ease, border-color 0.25s ease;
+  }
+  .aba:hover {
+    translate: 6px 0;
+  }
+  .aba[aria-selected='true'] {
+    background: #2a1e30;
+    border-color: var(--purple);
+  }
+  .aba__icone {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgb(255 255 255 / 0.04);
+    color: #6e6474;
+    transition: color 0.25s ease;
+  }
+  .aba[aria-selected='true'] .aba__icone {
+    color: var(--purple-light);
+    background: rgb(197 139 224 / 0.1);
+  }
+  .aba__titulo {
+    flex: 1;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  .aba :global(.aba__seta) {
+    flex: none;
+    color: var(--text-subtle);
+    transition: color 0.25s ease, transform 0.25s var(--ease-out);
+  }
+  .aba[aria-selected='true'] :global(.aba__seta) {
+    color: var(--purple-light);
+    transform: translateX(3px);
+  }
+
+  .formatos__painel {
+    display: grid;
+    border-radius: var(--raio-card);
+    background: radial-gradient(120% 120% at 100% 0%, #5a2a6e 0%, #2a1832 50%, #1d1820 100%);
+    overflow: hidden;
+  }
+  .painel-fmt {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: clamp(28px, 5vw, 56px);
+    animation: painel-entra 0.5s var(--ease-out) both;
+  }
+  .painel-fmt[hidden] {
+    display: none;
+  }
+  .painel-fmt__icone {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    background: rgb(197 139 224 / 0.14);
+    color: var(--purple-light);
+  }
+  .painel-fmt__titulo {
+    margin-top: 0.5rem;
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+  .painel-fmt__texto {
+    max-width: 30rem;
+    color: var(--text-muted);
+    font-size: 1.0625rem;
+  }
+  .painel-fmt .botao {
+    margin-top: 0.75rem;
+  }
+  @keyframes painel-entra {
+    from {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+  }
+  @media (min-width: 900px) {
+    .formatos__grade {
+      grid-template-columns: 1fr 1.15fr;
+    }
+    .painel-fmt {
+      justify-content: center;
+    }
+  }
+</style>
