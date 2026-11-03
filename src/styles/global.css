@@ -1,0 +1,117 @@
+@import '@fontsource-variable/space-grotesk';
+@import './tokens.css';
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ameixa-700);
+  color: var(--texto);
+  font-family: var(--fonte);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--largura);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.secao {
+  padding-block: clamp(56px, 9vw, 112px);
+}
+
+.eyebrow {
+  color: var(--roxo);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.titulo {
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.lead {
+  margin-top: 1rem;
+  max-width: 42rem;
+  color: var(--texto-2);
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+}
+
+.centro {
+  text-align: center;
+}
+
+.centro .lead {
+  margin-inline: auto;
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--roxo);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.botao:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 30px rgb(146 60 153 / 0.5);
+}
+
+:focus-visible {
+  outline: 2px solid var(--rosa);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
