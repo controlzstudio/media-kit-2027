@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+import { contato, rodape } from '../data/conteudo';
+
+const atualizada = '3 de novembro de 2026';
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Política de Privacidade, Mídia Kit Control Z Studio</title>
+    <meta name="description" content="Como o mídia kit do Control Z Studio trata dados pessoais." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main class="secao">
+      <article class="container politica">
+        <a href="/" class="voltar">← Voltar ao mídia kit</a>
+        <p class="eyebrow">Privacidade</p>
+        <h1 class="titulo">Política de Privacidade</h1>
+        <p class="lead">Última atualização: {atualizada}.</p>
+
+        <h2>Quem somos</h2>
+        <p>Este mídia kit é publicado pelo Control Z Studio, de Dennis Santana, para apresentar formatos de publicidade a marcas interessadas.</p>
+
+        <h2>Quais dados coletamos</h2>
+        <p>Nenhum, por conta própria. Esta página não tem formulário, não usa cookies e não tem ferramentas de análise ou de anúncio. As fontes e as imagens são servidas pelo próprio site.</p>
+        <p>Se você escrever para o nosso e-mail, recebemos o seu endereço e o que você enviar. Usamos esse conteúdo só para responder e conversar sobre a proposta.</p>
+
+        <h2>Links externos</h2>
+        <p>Os links para Instagram, TikTok e para o site do Control Z Studio levam a serviços com políticas próprias, que não controlamos.</p>
+
+        <h2>Seus direitos</h2>
+        <p>Pela Lei Geral de Proteção de Dados (Lei 13.709/2018), você pode pedir acesso, correção ou exclusão dos dados que nos enviou. É só escrever para <a href={`mailto:${contato.email}`}>{contato.email}</a>, o canal de contato do encarregado pelos dados.</p>
+      </article>
+    </main>
+    <footer class="rodape">
+      <p>{rodape}</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .politica {
+    max-width: 760px;
+  }
+  .voltar {
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    color: var(--texto-3);
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+  .voltar:hover {
+    color: var(--roxo);
+  }
+  h2 {
+    margin: 2.5rem 0 0.75rem;
+    font-size: 1.25rem;
+  }
+  .politica > p:not(.eyebrow):not(.lead) {
+    color: var(--texto-2);
+    margin-bottom: 0.75rem;
+  }
+  .politica a:not(.voltar) {
+    color: var(--lilas);
+  }
+  .rodape {
+    padding: 2.5rem var(--gutter);
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgb(255 255 255 / 0.25);
+    border-top: 1px solid var(--linha);
+  }
+</style>

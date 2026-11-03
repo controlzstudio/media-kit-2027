@@ -1,0 +1,24 @@
+/* Tokens do media kit. Origem: identidade do mídia kit 2026 (ctrlzmediakit.abacusai.app). */
+
+:root {
+  --ameixa-900: #160f17;
+  --ameixa-800: #1a141b;
+  --ameixa-700: #221c23;
+  --ameixa-600: #2a232b;
+  --roxo-escuro: #511d56;
+  --roxo-medio: #6a1b70;
+  --roxo: #923c99;
+  --lilas: #e9d5eb;
+  --lilas-claro: #f5ebf6;
+  --rosa: #ff90bb;
+  --menta: #bcdfd3;
+
+  --texto: #ffffff;
+  --texto-2: rgb(255 255 255 / 0.6);
+  --texto-3: rgb(255 255 255 / 0.4);
+  --linha: rgb(255 255 255 / 0.12);
+
+  --fonte: 'Space Grotesk Variable', system-ui, sans-serif;
+  --largura: 1200px;
+  --gutter: clamp(16px, 4vw, 24px);
+}
